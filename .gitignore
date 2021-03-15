@@ -20,3 +20,6 @@
 *.csv
 *.json
 *.json5
+
+.env
+.env.test
