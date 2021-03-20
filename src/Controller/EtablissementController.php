@@ -15,4 +15,15 @@ class EtablissementController extends AbstractController
             'controller_name' => 'EtablissementController',
         ]);
     }
+
+    #[Route('/lecture_csv', name: 'lecture_csv')]
+    public function lecture_csv(): Response
+    {
+        $entity_manager = $this->getDoctrine()->getManager();
+        $sRet           = '';
+
+
+
+        return new Response('Lecture réalisé sans echec, les retours sont:<br/>' . $sRet);
+    }
 }
