@@ -18,6 +18,12 @@ class EtablissementController extends AbstractController
         ]);
     }
 
+    #[Route('/etablissements/vue', name: 'getVueSansPage')]
+    public function getVueSansPage(): Response
+    {
+        return $this->redirect('/etablissements/vue/1');
+    }
+
     #[Route('/etablissements/vue/{page}', name: 'getVue')]
     public function getVue(int $page): Response
     {
