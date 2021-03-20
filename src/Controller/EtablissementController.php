@@ -28,16 +28,33 @@ class EtablissementController extends AbstractController
         return new Response('Lecture réalisé sans echec, les retours sont:<br/>' . $sRet);
     }
 
-    #[Route('/etablissement/vueEtablissement/{numPage}', name: 'vueEtablissement')]
-    public function getVueEtablissement(int $numPage): Response
+    #[Route('/etablissement/vue/{page}', name: 'vue')]
+    public function getVue(int $page): Response
     {
-        $entity_manager = $this->getDoctrine()->getManager();
-        $tabEtablissement = $entity_manager->getRepository(Etablissement::class)->findBy(array(), orderBy: array("id" => "ASC"), limit: 500, offset: ($numPage-1)*500);
-        $sRet = "";
-        foreach ($tabEtablissement as $etablissement)
-        {
-            $sRet .= $etablissement->getAppellationOfficelle()."<br>";
-        }
-        return new Response($sRet);
+        if( $page == 0 ) $page = 1;
+
+        $page = abs($page);
+
+        $manager        = $this->getDoctrine()->getManager()->getRepository(Etablissement::class);
+        $etablissements = $manager->findBy(array(), orderBy: array("id" => "ASC"), limit: 500, offset: ($page-1)*500);
+
+        $i = 0;
+        $sRet = "<table>";
+        foreach ($etablissements as $etablissement)
+            $sRet .= "<tr><td>" . ($i++ +1) . "</td><td>" . $etablissement->getId() . "</td><td>" . $etablissement->getUai() . "</td><td>" . $etablissement->getAppellationOfficelle() . "</td></tr>";
+
+        return new Response('Lecture réalisé sans echec, les retours sont:<br/>' . $sRet."</table>");
+    }
+
+    #[Route('/etablissement/supprimer', name: 'supprimer')]
+    public function supprimer()
+    {
+        return new Response("Supprimer");
+    }
+
+    #[Route('/etablissement/modifier', name: 'modifier')]
+    public function modifier()
+    {
+        return new Response("Modifier");
     }
 }
