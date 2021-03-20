@@ -46,12 +46,12 @@ class EtablissementController extends AbstractController
     #[Route('/etablissements/supprimer', name: "supprimer")]
     public function supprimer(): Response
     {
-        return new Response("supprimer vide");
+        return new Response("supprimer vide pour le moment");
     }
 
     #[Route('/etablissements/modifier', name: "modifier")]
     public function modifier(): Response
     {
-        return new Response("modifier vide");
+        return new Response("modifier vide pour le moment");
     }
 }
