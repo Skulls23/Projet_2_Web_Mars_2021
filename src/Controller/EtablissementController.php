@@ -18,8 +18,8 @@ class EtablissementController extends AbstractController
         ]);
     }
 
-    #[Route('/etablissements/vueEtablissement/{page}', name: 'vueEtablissement')]
-    public function getAll(int $page): Response
+    #[Route('/etablissements/vue/{page}', name: 'getVue')]
+    public function getVue(int $page): Response
     {
         if( $page == 0 ) $page = 1;
 
@@ -29,10 +29,22 @@ class EtablissementController extends AbstractController
         $etablissements = $manager->findBy(array(), orderBy: array("id" => "ASC"), limit: 500, offset: ($page-1)*500);
 
         $i = 0;
-        $sRet = "<table>";
+        $sRet = "<table style='border: solid black'>";
         foreach ($etablissements as $etablissement)
-            $sRet .= "<tr><td>" . ($i++ +1) . "</td><td>" . $etablissement->getId() . "</td><td>" . $etablissement->getUai() . "</td><td>" . $etablissement->getAppellationOfficelle() . "</td></tr>";
+            $sRet .= "<tr style='border: solid black'><td style='border: solid black'>" . ($i++ +1) . "</td><td>" . $etablissement->getId() . "</td><td>" . $etablissement->getUai() . "</td><td>" . $etablissement->getAppellationOfficelle() . "</td></tr>";
 
         return new Response('Lecture réalisé sans echec, les retours sont:<br/>' . $sRet."</table>");
+    }
+
+    #[Route('/etablissements/supprimer', name: "supprimer")]
+    public function supprimer(): Response
+    {
+        return new Response("supprimer vide");
+    }
+
+    #[Route('/etablissements/modifier', name: "modifier")]
+    public function modifier(): Response
+    {
+        return new Response("modifier vide");
     }
 }
