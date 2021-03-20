@@ -7,6 +7,7 @@ use DateTime;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Routing\RouteCollection;
 
 class EtablissementController extends AbstractController
 {
@@ -35,11 +36,11 @@ class EtablissementController extends AbstractController
         $etablissements = $manager->findBy(array(), orderBy: array("id" => "ASC"), limit: 500, offset: ($page-1)*500);
 
         $i = 0;
-        $sRet = "<table style='border: solid black'>";
+        $sRet = "<table>";
         foreach ($etablissements as $etablissement)
-            $sRet .= "<tr style='border: solid black'><td style='border: solid black'>" . ($i++ +1) . "</td><td>" . $etablissement->getId() . "</td><td>" . $etablissement->getUai() . "</td><td>" . $etablissement->getAppellationOfficelle() . "</td></tr>";
+            $sRet .= "<tr><td>" . ($i++ +1) . "</td><td>" . $etablissement->getId() . "</td><td>" . $etablissement->getUai() . "</td><td>" . $etablissement->getAppellationOfficelle() . "</td></tr>";
 
-        return new Response('Lecture réalisé sans echec, les retours sont:<br/>' . $sRet."</table>");
+        return new Response('Lecture réalisé sans echec, les retours sont:<br/><br/>' . $sRet."</table>");
     }
 
     #[Route('/etablissements/supprimer', name: "supprimer")]
