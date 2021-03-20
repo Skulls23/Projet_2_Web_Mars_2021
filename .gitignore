@@ -21,6 +21,9 @@
 *.json
 *.json5
 
+*iml
+composer.lock
+
 .env
 .env.test
 
