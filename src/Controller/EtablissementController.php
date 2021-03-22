@@ -19,13 +19,13 @@ class EtablissementController extends AbstractController
         ]);
     }
 
-    #[Route('/etablissements/vue', name: 'getVueSansPage')]
+    #[Route('/etablissements/vue', name: 'getVueSansPageEtablissement')]
     public function getVueSansPage(): Response
     {
         return $this->redirect('/etablissements/vue/1');
     }
 
-    #[Route('/etablissements/vue/{page}', name: 'getVue')]
+    #[Route('/etablissements/vue/{page}', name: 'getVueEtablissement')]
     public function getVue(int $page): Response
     {
         if( $page == 0 ) $page = 1;
@@ -43,7 +43,7 @@ class EtablissementController extends AbstractController
         return new Response('Lecture réalisé sans echec, les retours sont:<br/><br/>' . $sRet."</table>");
     }
 
-    #[Route('/etablissements/supprimer', name: "supprimer")]
+    #[Route('/etablissements/supprimer', name: "supprimerEtablissement")]
     public function supprimer(): Response
     {
         if( !isset($_POST['uai']) && !isset($_POST['id']))
@@ -71,7 +71,7 @@ class EtablissementController extends AbstractController
         }
     }
 
-    #[Route('/etablissements/modifier', name: "modifier")]
+    #[Route('/etablissements/modifier', name: "modifierEtablissement")]
     public function modifier(): Response
     {
         return new Response("vide modif");

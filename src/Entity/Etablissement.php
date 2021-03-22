@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\EtablissementRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -86,6 +88,16 @@ class Etablissement
      * @ORM\Column(type="date")
      */
     private $date_ouverture;
+
+    /**
+     * @ORM\OneToMany(targetEntity=Commentaire::class, mappedBy="uai", orphanRemoval=true)
+     */
+    private $commentaire;
+
+    public function __construct()
+    {
+        $this->commentaire = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -256,6 +268,36 @@ class Etablissement
     public function setDateOuverture(\DateTimeInterface $date_ouverture): self
     {
         $this->date_ouverture = $date_ouverture;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Commentaire[]
+     */
+    public function getCommentaire(): Collection
+    {
+        return $this->commentaire;
+    }
+
+    public function addCommentaire(Commentaire $commentaire): self
+    {
+        if (!$this->commentaire->contains($commentaire)) {
+            $this->commentaire[] = $commentaire;
+            $commentaire->setUai($this);
+        }
+
+        return $this;
+    }
+
+    public function removeCommentaire(Commentaire $commentaire): self
+    {
+        if ($this->commentaire->removeElement($commentaire)) {
+            // set the owning side to null (unless already changed)
+            if ($commentaire->getUai() === $this) {
+                $commentaire->setUai(null);
+            }
+        }
 
         return $this;
     }
