@@ -1,0 +1,17 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Modifier etablissement{% endblock %}
+
+{% block body %}
+
+    <h2>{{ message }}</h2>
+
+    <form method="post">
+        <label for="uai">
+            UAI:
+            <input type="text" name="uai" />
+        </label>
+        <input type="submit">
+    </form>
+
+{% endblock %}
