@@ -3,6 +3,7 @@
 namespace App\DataFixtures;
 
 use App\Entity\Etablissement;
+use App\Entity\SecteurEnum;
 use DateTime;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Persistence\ObjectManager;
@@ -29,13 +30,13 @@ class EtablissementFixture extends Fixture
                 $et->setUai                 ($lines[ 0]);
                 $et->setAppellationOfficelle($lines[ 1]);
                 $et->setDenomination        ($lines[ 2]);
-                $et->setSecteur             ($lines[ 4]);
+                $et->setSecteur             (SecteurEnum::get($lines[ 4]));
                 $et->setAdresse             ($lines[ 5]);
-                $et->setCodePostal          (intval($lines[ 7]));
+                $et->setCodePostal          (intval($lines[ 8]));
                 $et->setCommune             ($lines[10]);
                 $et->setLatitude            (floatval($lines[14]));
                 $et->setLongitude           (floatval($lines[15]));
-                $et->setCodeDepartement     (intval($lines[22]));
+                $et->setCodeDepartement     ($lines[22]);
                 $et->setDepartement         ($lines[26]);
                 $et->setRegion              ($lines[27]);
                 $et->setAcademie            ($lines[28]);

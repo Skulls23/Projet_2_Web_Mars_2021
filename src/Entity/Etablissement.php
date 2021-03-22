@@ -33,7 +33,7 @@ class Etablissement
     private $denomination;
 
     /**
-     * @ORM\Column(type="string", length=50)
+     * @ORM\Column(type="string", columnDefinition="enum('Public', 'Privée')")
      */
     private $secteur;
 
@@ -58,7 +58,7 @@ class Etablissement
     private $departement;
 
     /**
-     * @ORM\Column(type="integer")
+     * @ORM\Column(type="string", length=255)
      */
     private $code_departement;
 
@@ -188,12 +188,12 @@ class Etablissement
         return $this;
     }
 
-    public function getCodeDepartement(): ?int
+    public function getCodeDepartement(): ?string
     {
         return $this->code_departement;
     }
 
-    public function setCodeDepartement(int $code_departement): self
+    public function setCodeDepartement(string $code_departement): self
     {
         $this->code_departement = $code_departement;
 
