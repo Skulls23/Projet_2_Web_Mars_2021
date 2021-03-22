@@ -25,7 +25,7 @@
 *iml
 composer.lock
 
-.env
+env
 .env.test
 
 data/
