@@ -1,0 +1,14 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Confirmation{% endblock %}
+
+{% block body %}
+
+    <p>Confirmer suppression de {{ nom }} avec le code postal "{{ code_postal }}" ?</p>
+
+    <form method="post">
+        <input type="hidden" name="id" value="{{ id }}" />
+        <input type="submit" value="valider">
+    </form>
+
+{% endblock %}

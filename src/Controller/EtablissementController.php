@@ -46,12 +46,34 @@ class EtablissementController extends AbstractController
     #[Route('/etablissements/supprimer', name: "supprimer")]
     public function supprimer(): Response
     {
-        return new Response("supprimer vide pour le moment");
+        if( !isset($_POST['uai']) && !isset($_POST['id']))
+            return $this->render('etablissement/supprimer/supprimer.html.twig', array("message" => ""));
+
+        $manager = $this->getDoctrine()->getManager();
+        $reposit = $manager->getRepository(Etablissement::class);
+
+        if( isset($_POST['uai']) && !isset($_POST['id']))
+        {
+            $etablissement = $reposit->findBy(array("uai" => htmlspecialchars($_POST['uai'])));
+
+            if( $etablissement == null ||count($etablissement) == 0 )
+                return $this->render('etablissement/supprimer/supprimer.html.twig', array("message" => "not found"));
+
+            return $this->render('etablissement/supprimer/supprimer_confirmation.html.twig', array("nom" => $etablissement[0]->getAppellationOfficelle(),
+                "id" => $etablissement[0]->getId(), "code_postal" => $etablissement[0]->getCodePostal()));
+        }
+        else
+        {
+            $manager->remove($reposit->find(intval(htmlspecialchars($_POST['id']))));
+            $manager->flush();
+
+            return $this->render('etablissement/supprimer/supprimer.html.twig', array("message" => "suppression effectué"));
+        }
     }
 
     #[Route('/etablissements/modifier', name: "modifier")]
     public function modifier(): Response
     {
-        return new Response("modifier vide pour le moment");
+        return new Response("vide modif");
     }
 }
