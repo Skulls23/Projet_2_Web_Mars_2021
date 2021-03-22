@@ -74,6 +74,26 @@ class EtablissementController extends AbstractController
     #[Route('/etablissements/modifier', name: "modifierEtablissement")]
     public function modifier(): Response
     {
+        if( !isset($_POST['uai']) && !isset($_POST['id']))
+            return $this->render('etablissement/modifier/modifier.html.twig', array("message" => "Modification d'un Établissement"));
+
+        $manager = $this->getDoctrine()->getManager();
+        $reposit = $manager->getRepository(Etablissement::class);
+
+        if( isset($_POST['uai']) && !isset($_POST['id']))
+        {
+            $etablissement = $reposit->findBy(array("uai" => htmlspecialchars($_POST['uai'])));
+
+            if( $etablissement == null ||count($etablissement) == 0 )
+                return $this->render('etablissement/modifier/modifier.html.twig', array("message" => "not found"));
+
+
+        }
+        else
+        {
+
+        }
+
         return new Response("vide modif");
     }
 }
