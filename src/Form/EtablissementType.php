@@ -3,6 +3,8 @@
 namespace App\Form;
 
 use App\Entity\Etablissement;
+use App\Entity\SecteurEnum;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\DateIntervalType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\Extension\Core\Type\IntegerType;
@@ -21,9 +23,9 @@ class EtablissementType extends AbstractType
             ->add('uai', TextType::class)
             ->add('appellation_officelle', TextType::class)
             ->add('denomination', TextType::class)
-            ->add('secteur', TextType::class)
-            ->add('latitude', NumberType::class)
-            ->add('longitude', NumberType::class)
+            ->add('secteur', ChoiceType::class, array("choices" => SecteurEnum::assocValues()))
+            ->add('latitude', NumberType::class, array("scale" => 15))
+            ->add('longitude', NumberType::class, array("scale" => 15))
             ->add('adresse', TextType::class)
             ->add('departement', TextType::class)
             ->add('code_departement', IntegerType::class)

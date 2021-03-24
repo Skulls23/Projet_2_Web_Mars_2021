@@ -35,11 +35,9 @@ class EtablissementController extends AbstractController
         $manager        = $this->getDoctrine()->getManager()->getRepository(Etablissement::class);
         $etablissements = $manager->findBy(array(), orderBy: array("id" => "ASC"), limit: 50, offset: ($page-1)*50);
 
-        echo("<form method='get' action=''>");
-        echo("<input type='button' name='page' value='".($page+1)."'  ></button>");
-        echo("<input type='button' name='page' value='".($page+5)."'  ></button>");
-        echo("<input type='button' name='page' value='".($page+10)."' ></button>");
-        echo("</form>");
+        echo("<a href='/etablissements/vue/".($page+1)."'  >".($page+1)."</a>");
+        echo("<a href='/etablissements/vue/".($page+5)."'  >".($page+5)."</a>");
+        echo("<a href='/etablissements/vue/".($page+10)."' >".($page+10)."</a>");
 
         $i = 0;
         $sRet = "<table>";
@@ -98,14 +96,21 @@ class EtablissementController extends AbstractController
     }
 
     #[Route('/etablissements/inserer', name: "insererEtablissement")]
-    public function inserer(): Response
+    public function inserer(Request $req): Response
     {
-        $type = new EtablissementType();
-        $form = $this->createFormBuilder(new Etablissement());
+        $manager = $this->getDoctrine()->getManager();
 
-        $type->buildForm($form, array());
+        $et = new Etablissement();
 
+        $form = $this->createForm(EtablissementType::class, $et);
+        $form->handleRequest($req);
 
-        return $this->render('etablissement/inserer/inserer.html.twig', array("form" => $form->getForm()->createView()));
+        if( $form->isSubmitted() && $form->isValid() )
+        {
+            $manager->persist($et);
+            $manager->flush();
+        }
+
+        return $this->render('etablissement/modifier/modifier.html.twig', array("form" => $form->createView()));
     }
 }

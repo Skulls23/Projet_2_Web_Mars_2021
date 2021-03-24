@@ -18,6 +18,12 @@ class SecteurEnum
             self::PUBLIC );
     }
 
+    public static function assocValues(): array
+    {
+        return array( self::PRIVEE => self::PRIVEE,
+            self::PUBLIC => self::PUBLIC );
+    }
+
     #[Pure] public static function isSecteur(string $str ): bool
     {
         return array_search($str, self::values());
