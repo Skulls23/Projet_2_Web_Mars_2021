@@ -1,0 +1,24 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Selection Etablissement{% endblock %}
+
+{% block body %}
+
+    <center>
+        <a href="/etablissements/vue/{{ page1 }}" >{{ page1 }} </a>&nbsp;
+        <a href="/etablissements/vue/{{ page5 }}" >{{ page5 }} </a>&nbsp;
+        <a href="/etablissements/vue/{{ page10 }}">{{ page10 }}</a> <br/>
+    </center>
+
+    <table>
+        {% for et in etablissements %}
+            <tr>
+                <td>{{ et.getId() }}</td>
+                <td>{{ et.getUai() }}</td>
+                <td>{{ et.getAppellationOfficelle() }}</td>
+                <td>{{ et.getCodePostal() }}</td>
+            </tr>
+        {% endfor %}
+    </table>
+
+{% endblock %}

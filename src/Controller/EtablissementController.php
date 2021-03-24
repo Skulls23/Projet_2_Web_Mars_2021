@@ -35,16 +35,7 @@ class EtablissementController extends AbstractController
         $manager        = $this->getDoctrine()->getManager()->getRepository(Etablissement::class);
         $etablissements = $manager->findBy(array(), orderBy: array("id" => "ASC"), limit: 50, offset: ($page-1)*50);
 
-        echo("<a href='/etablissements/vue/".($page+1)."'  >".($page+1)."</a>");
-        echo("<a href='/etablissements/vue/".($page+5)."'  >".($page+5)."</a>");
-        echo("<a href='/etablissements/vue/".($page+10)."' >".($page+10)."</a>");
-
-        $i = 0;
-        $sRet = "<table>";
-        foreach ($etablissements as $etablissement)
-            $sRet .= "<tr><td>" . ($i++ +1) . "</td><td>" . $etablissement->getId() . "</td><td>" . $etablissement->getUai() . "</td><td>" . $etablissement->getAppellationOfficelle() . "</td></tr>";
-
-        return new Response("Lecture réalisé sans echec, les retours sont:<br/><br/>" . $sRet."</table>");
+        return $this->render('etablissement/vue/vue.html.twig', array("page1"=>$page+1, "page5"=>$page+5, "page10"=>$page+10, "etablissements"=>$etablissements));
     }
 
     #[Route('/etablissements/supprimer', name: "supprimerEtablissement")]
