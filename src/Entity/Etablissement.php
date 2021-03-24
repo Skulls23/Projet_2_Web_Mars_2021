@@ -6,6 +6,7 @@ use App\Repository\EtablissementRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass=EtablissementRepository::class)
@@ -20,11 +21,15 @@ class Etablissement
     private $id;
 
     /**
+     * @Assert\NotBlank()
+     *
      * @ORM\Column(type="string", length=255)
      */
     private $uai;
 
     /**
+     * @Assert\NotBlank()
+     *
      * @ORM\Column(type="string", length=512)
      */
     private $appellation_officelle;
@@ -35,21 +40,37 @@ class Etablissement
     private $denomination;
 
     /**
+     * @Assert\NotBlank()
+     *
      * @ORM\Column(type="string", columnDefinition="enum('Public', 'Privée')")
      */
     private $secteur;
 
     /**
+     * @Assert\Range(
+     *      min = -90,
+     *      max = 90,
+     *      notInRangeMessage = "A latitude value must be within  {{ min }} and {{ max }} degrees",
+     * )
+     *
      * @ORM\Column(type="float")
      */
     private $latitude;
 
     /**
+     * @Assert\Range(
+     *      min = 0,
+     *      max = 180,
+     *      notInRangeMessage = "A longitude value must be within  {{ min }} and {{ max }} degrees",
+     * )
+     *
      * @ORM\Column(type="float")
      */
     private $longitude;
 
     /**
+     * @Assert\NotBlank()
+     *
      * @ORM\Column(type="string", length=1024)
      */
     private $adresse;
@@ -80,11 +101,19 @@ class Etablissement
     private $academie;
 
     /**
+     * @Assert\Range(
+     *      min = 0,
+     *      max = 100000,
+     *      notInRangeMessage = "A longitude value must be within  {{ min }} and {{ max }} degrees",
+     * )
+     *
      * @ORM\Column(type="integer")
      */
     private $code_postal;
 
     /**
+     * @Assert\NotBlank()
+     *
      * @ORM\Column(type="date")
      */
     private $date_ouverture;

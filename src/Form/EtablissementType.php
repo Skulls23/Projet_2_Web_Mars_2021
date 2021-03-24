@@ -21,18 +21,18 @@ class EtablissementType extends AbstractType
     {
         $builder
             ->add('uai', TextType::class)
-            ->add('appellation_officelle', TextType::class)
+            ->add('appellation_officelle', TextType::class, array("attr"=>array("required")))
             ->add('denomination', TextType::class)
             ->add('secteur', ChoiceType::class, array("choices" => SecteurEnum::assocValues()))
             ->add('latitude', NumberType::class, array("scale" => 15))
             ->add('longitude', NumberType::class, array("scale" => 15))
             ->add('adresse', TextType::class)
             ->add('departement', TextType::class)
-            ->add('code_departement', IntegerType::class)
+            ->add('code_departement', IntegerType::class, array("attr"=>array("max"=>100000, "min"=>0)))
             ->add('commune', TextType::class)
             ->add('region', TextType::class)
             ->add('academie', TextType::class)
-            ->add('code_postal', IntegerType::class)
+            ->add('code_postal', IntegerType::class, array("attr"=>array("max"=>100000, "min"=>0)))
             ->add('date_ouverture', DateType::class, array("years" => range(1950, 2100)))
             ->add('save', SubmitType::class)
         ;
