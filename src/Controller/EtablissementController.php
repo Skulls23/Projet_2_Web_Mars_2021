@@ -35,12 +35,18 @@ class EtablissementController extends AbstractController
         $manager        = $this->getDoctrine()->getManager()->getRepository(Etablissement::class);
         $etablissements = $manager->findBy(array(), orderBy: array("id" => "ASC"), limit: 50, offset: ($page-1)*50);
 
+        echo("<form method='get' action=''>");
+        echo("<input type='button' name='page' value='".($page+1)."'  ></button>");
+        echo("<input type='button' name='page' value='".($page+5)."'  ></button>");
+        echo("<input type='button' name='page' value='".($page+10)."' ></button>");
+        echo("</form>");
+
         $i = 0;
         $sRet = "<table>";
         foreach ($etablissements as $etablissement)
             $sRet .= "<tr><td>" . ($i++ +1) . "</td><td>" . $etablissement->getId() . "</td><td>" . $etablissement->getUai() . "</td><td>" . $etablissement->getAppellationOfficelle() . "</td></tr>";
 
-        return new Response('Lecture réalisé sans echec, les retours sont:<br/><br/>' . $sRet."</table>");
+        return new Response("Lecture réalisé sans echec, les retours sont:<br/><br/>" . $sRet."</table>");
     }
 
     #[Route('/etablissements/supprimer', name: "supprimerEtablissement")]
@@ -94,9 +100,6 @@ class EtablissementController extends AbstractController
     #[Route('/etablissements/inserer', name: "insererEtablissement")]
     public function inserer(): Response
     {
-        $manager = $this->getDoctrine()->getManager();
-        $reposit = $manager->getRepository(Etablissement::class);
-
         $type = new EtablissementType();
         $form = $this->createFormBuilder(new Etablissement());
 
