@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\Etablissement;
 use App\Form\EtablissementType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
@@ -71,19 +72,23 @@ class EtablissementController extends AbstractController
     }
 
     #[Route('/etablissements/{id}/modifier', name: "modifierEtablissement")]
-    public function modifier( int $id ): Response
+    public function modifier( Request $req, int $id ): Response
     {
         $manager = $this->getDoctrine()->getManager();
         $reposit = $manager->getRepository(Etablissement::class);
 
         $et = $reposit->find($id);
 
-        $type = new EtablissementType();
-        $form = $this->createFormBuilder($et);
+        $form = $this->createForm(EtablissementType::class, $et);
+        $form->handleRequest($req);
 
-        $type->buildForm($form, array());
+        if( $form->isSubmitted() && $form->isValid() )
+        {
+            $manager->persist($et);
+            $manager->flush();
+        }
 
-        return $this->render('etablissement/modifier/modifier.html.twig', array("form" => $form->getForm()->createView()));
+        return $this->render('etablissement/modifier/modifier.html.twig', array("form" => $form->createView()));
     }
 
     #[Route('/etablissements/inserer', name: "insererEtablissement")]
