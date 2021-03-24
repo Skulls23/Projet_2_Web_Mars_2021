@@ -12,7 +12,7 @@
 {% block title %}Carte{% endblock %}
 
 {% block body %}
-    <div id="map" style="height: 500px;"></div>
+    <div id="map" style="position: absolute;height: 98%; width: 99%"></div>
 
     <script>
         const draw_map = (data) => {
@@ -27,24 +27,13 @@
         };
 
         const data = [
+            {% for et in etablissements %}
             {
-                nom:'Ecole élémentaire Dauphine',
-                lat:'49.48957543806298',
-                lon:'0.11556983645413253'
+                nom: '{{ et.getAppellationOfficelle() }}',
+                lat: '{{ et.getLatitude() }}',
+                lon: '{{ et.getLongitude() }}'
             },
-            {
-                nom:'Collège Descartes',
-                lat:'49.51941345248356',
-                lon:'0.10888053221663069'
-            },
-            {
-                nom:'Lycée général François Ier',
-                lat:'49.49610537217045',
-                lon:'0.1137094907033469'
-            },
-            /*
-              TODO: à vous d'ajouter la suite dynamiquement avec TWIG...
-            */
+            {% endfor %}
         ];
 
         draw_map(data);

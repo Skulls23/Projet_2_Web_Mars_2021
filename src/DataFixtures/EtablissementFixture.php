@@ -37,6 +37,7 @@ class EtablissementFixture extends Fixture
                 $et->setLatitude            (floatval($lines[14]));
                 $et->setLongitude           (floatval($lines[15]));
                 $et->setCodeDepartement     ($lines[22]);
+                $et->setCodeCommune         (intval($lines[25]));
                 $et->setDepartement         ($lines[26]);
                 $et->setRegion              ($lines[27]);
                 $et->setAcademie            ($lines[28]);

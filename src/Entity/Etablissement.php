@@ -104,7 +104,7 @@ class Etablissement
      * @Assert\Range(
      *      min = 0,
      *      max = 100000,
-     *      notInRangeMessage = "A longitude value must be within  {{ min }} and {{ max }} degrees",
+     *      notInRangeMessage = "value must be within  {{ min }} and {{ max }} !",
      * )
      *
      * @ORM\Column(type="integer")
@@ -122,6 +122,17 @@ class Etablissement
      * @ORM\OneToMany(targetEntity=Commentaire::class, mappedBy="uai", orphanRemoval=true)
      */
     private $commentaire;
+
+    /**
+     * @Assert\Range(
+     *      min = 0,
+     *      max = 100000,
+     *      notInRangeMessage = "A value must be within  {{ min }} and {{ max }} !",
+     * )
+     *
+     * @ORM\Column(type="integer")
+     */
+    private $code_commune;
 
     public function __construct()
     {
@@ -327,6 +338,18 @@ class Etablissement
                 $commentaire->setUai(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getCodeCommune(): ?int
+    {
+        return $this->code_commune;
+    }
+
+    public function setCodeCommune(int $code_commune): self
+    {
+        $this->code_commune = $code_commune;
 
         return $this;
     }
