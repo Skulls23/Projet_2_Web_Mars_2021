@@ -3,7 +3,9 @@
 namespace App\Controller;
 
 use App\Entity\Etablissement;
+use App\Form\EtablissementType;
 use DateTime;
+use Doctrine\DBAL\Types\TextType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -33,7 +35,7 @@ class EtablissementController extends AbstractController
         $page = abs($page);
 
         $manager        = $this->getDoctrine()->getManager()->getRepository(Etablissement::class);
-        $etablissements = $manager->findBy(array(), orderBy: array("id" => "ASC"), limit: 500, offset: ($page-1)*500);
+        $etablissements = $manager->findBy(array(), orderBy: array("id" => "ASC"), limit: 50, offset: ($page-1)*50);
 
         $i = 0;
         $sRet = "<table>";
@@ -71,29 +73,19 @@ class EtablissementController extends AbstractController
         }
     }
 
-    #[Route('/etablissements/modifier', name: "modifierEtablissement")]
-    public function modifier(): Response
+    #[Route('/etablissements/{id}/modifier', name: "modifierEtablissement")]
+    public function modifier( int $id ): Response
     {
-        if( !isset($_POST['uai']) && !isset($_POST['id']))
-            return $this->render('etablissement/modifier/modifier.html.twig', array("message" => "Modification d'un Établissement"));
-
         $manager = $this->getDoctrine()->getManager();
         $reposit = $manager->getRepository(Etablissement::class);
 
-        if( isset($_POST['uai']) && !isset($_POST['id']))
-        {
-            $etablissement = $reposit->findBy(array("uai" => htmlspecialchars($_POST['uai'])));
+        $et = $reposit->find($id);
 
-            if( $etablissement == null ||count($etablissement) == 0 )
-                return $this->render('etablissement/modifier/modifier.html.twig', array("message" => "not found"));
+        $type = new EtablissementType();
+        $form = $this->createFormBuilder($et);
 
+        $type->buildForm($form, array());
 
-        }
-        else
-        {
-
-        }
-
-        return new Response("vide modif");
+        return $this->render('etablissement/modifier/modifier.html.twig', array("form" => $form->getForm()->createView()));
     }
 }
