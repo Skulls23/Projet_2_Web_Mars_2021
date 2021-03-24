@@ -1,0 +1,111 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Modifier etablissement{% endblock %}
+
+{% block body %}
+
+    <h2>{{ message }}</h2>
+
+    <form method="post">
+        <label for="uai">
+            UAI:
+            <input type="text" name="uai"/>
+        </label>
+
+        <br/>
+
+        <label for="appellation_officelle">
+            Appellation officielle :
+            <input type="text" name="appellation_officelle"/>
+        </label>
+
+        <br/>
+
+        <label for="denomination">
+            Denomination :
+            <input type="text" name="denomination"/>
+        </label>
+
+        <br/>
+
+        <label for="secteur">
+            Secteur :
+            <input type="text" name="secteur"/>
+        </label>
+
+        <br/>
+
+        <label for="latitude">
+            Latitude :
+            <input type="number" name="latitude" step="0.0000000000001"/>
+        </label>
+
+        <br/>
+
+        <label for="longitude">
+            Longitude :
+            <input type="number" name="longitude" step="0.0000000000001"/>
+        </label>
+
+        <br/>
+
+        <label for="adresse">
+            adresse :
+            <input type="text" name="adresse"/>
+        </label>
+
+        <br/>
+
+        <label for="departement">
+            Département :
+            <input type="text" name="departement"/>
+        </label>
+
+        <br/>
+
+        <label for="code_departement">
+            Code département :
+            <input type="text" name="code_departement"/>
+        </label>
+
+        <br/>
+
+        <label for="commune">
+            Commune :
+            <input type="text" name="commune"/>
+        </label>
+
+        <br/>
+
+        <label for="region">
+            Région :
+            <input type="text" name="region"/>
+        </label>
+
+        <br/>
+
+        <label for="academie">
+            Académie :
+            <input type="text" name="academie"/>
+        </label>
+
+        <br/>
+
+        <label for="code_postal">
+            Code postal :
+            <input type="text" name="code_postal"/>
+        </label>
+
+        <br/>
+
+        <label for="date_ouverture">
+            Date ouverture :
+            <input type="text" name="date_ouverture"/>
+        </label>
+
+        <br/>
+
+        <input type="submit">
+    </form>
+
+{% endblock %}

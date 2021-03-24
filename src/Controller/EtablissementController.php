@@ -4,12 +4,9 @@ namespace App\Controller;
 
 use App\Entity\Etablissement;
 use App\Form\EtablissementType;
-use DateTime;
-use Doctrine\DBAL\Types\TextType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Component\Routing\RouteCollection;
 
 class EtablissementController extends AbstractController
 {
@@ -87,5 +84,11 @@ class EtablissementController extends AbstractController
         $type->buildForm($form, array());
 
         return $this->render('etablissement/modifier/modifier.html.twig', array("form" => $form->getForm()->createView()));
+    }
+
+    #[Route('/etablissements/inserer', name: "insererEtablissement")]
+    public function inserer(): Response
+    {
+        return $this->render('etablissement/inserer/inserer.html.twig', array("message" => "Création d'un établissement"));
     }
 }
