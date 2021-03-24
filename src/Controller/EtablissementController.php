@@ -89,6 +89,15 @@ class EtablissementController extends AbstractController
     #[Route('/etablissements/inserer', name: "insererEtablissement")]
     public function inserer(): Response
     {
-        return $this->render('etablissement/inserer/inserer.html.twig', array("message" => "Création d'un établissement"));
+        $manager = $this->getDoctrine()->getManager();
+        $reposit = $manager->getRepository(Etablissement::class);
+
+        $type = new EtablissementType();
+        $form = $this->createFormBuilder(new Etablissement());
+
+        $type->buildForm($form, array());
+
+
+        return $this->render('etablissement/inserer/inserer.html.twig', array("form" => $form->getForm()->createView()));
     }
 }
