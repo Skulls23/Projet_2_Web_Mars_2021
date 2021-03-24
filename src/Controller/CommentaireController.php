@@ -38,9 +38,9 @@ class CommentaireController extends AbstractController
         return new Response("supprimer vide pour le moment");
     }
 
-    #[Route('/commentaires/modifier', name: "modifierCommentaire")]
+    #[Route('/commentaires/modifier_inserer', name: "modifierCommentaire")]
     public function modifier(): Response
     {
-        return new Response("modifier vide pour le moment");
+        return new Response("modifier_inserer vide pour le moment");
     }
 }

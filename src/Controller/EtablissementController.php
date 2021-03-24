@@ -83,7 +83,7 @@ class EtablissementController extends AbstractController
             $manager->flush();
         }
 
-        return $this->render('etablissement/modifier/modifier.html.twig', array("form" => $form->createView()));
+        return $this->render('etablissement/modifier_inserer/formulaire.html.twig', array("form" => $form->createView()));
     }
 
     #[Route('/etablissements/inserer', name: "insererEtablissement")]
@@ -102,6 +102,6 @@ class EtablissementController extends AbstractController
             $manager->flush();
         }
 
-        return $this->render('etablissement/modifier/modifier.html.twig', array("form" => $form->createView()));
+        return $this->render('etablissement/modifier_inserer/formulaire.html.twig', array("form" => $form->createView()));
     }
 }
