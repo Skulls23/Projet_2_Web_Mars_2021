@@ -33,7 +33,7 @@ class EtablissementController extends AbstractController
         $page = abs($page);
 
         $manager        = $this->getDoctrine()->getManager()->getRepository(Etablissement::class);
-        $etablissements = $manager->findBy(array(), orderBy: array("id" => "ASC"), limit: 500, offset: ($page-1)*500);
+        $etablissements = $manager->findBy(array(), orderBy: array("id" => "ASC"), limit: 50, offset: ($page-1)*50);
 
         $i = 0;
         $sRet = "<table>";
