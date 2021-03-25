@@ -30,6 +30,7 @@ class EtablissementType extends AbstractType
             ->add('departement', TextType::class)
             ->add('code_departement', IntegerType::class, array("attr"=>array("max"=>100000, "min"=>0)))
             ->add('commune', TextType::class)
+            ->add('code_commune', IntegerType::class)
             ->add('region', TextType::class)
             ->add('academie', TextType::class)
             ->add('code_postal', IntegerType::class, array("attr"=>array("max"=>100000, "min"=>0)))

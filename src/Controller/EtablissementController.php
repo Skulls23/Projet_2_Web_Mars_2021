@@ -72,7 +72,7 @@ class EtablissementController extends AbstractController
         $manager = $this->getDoctrine()->getManager();
         $reposit = $manager->getRepository(Etablissement::class);
 
-        $et = $reposit->find($id);
+        $et = $id > -1 ? $reposit->find($id) : new Etablissement();
 
         $form = $this->createForm(EtablissementType::class, $et);
         $form->handleRequest($req);
@@ -89,19 +89,6 @@ class EtablissementController extends AbstractController
     #[Route('/etablissements/inserer', name: "insererEtablissement")]
     public function inserer(Request $req): Response
     {
-        $manager = $this->getDoctrine()->getManager();
-
-        $et = new Etablissement();
-
-        $form = $this->createForm(EtablissementType::class, $et);
-        $form->handleRequest($req);
-
-        if( $form->isSubmitted() && $form->isValid() )
-        {
-            $manager->persist($et);
-            $manager->flush();
-        }
-
-        return $this->render('etablissement/modifier_inserer/formulaire.html.twig', array("form" => $form->createView()));
+        return $this->modifier($req, -1);
     }
 }
