@@ -1,0 +1,11 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Communes{% endblock %}
+
+{% block body %}
+
+    {% for val in communes %}
+        <a href="/carte/commune/{{ val['code_commune'] }}">{{ val['code_commune'] }} - {{ val['commune'] }}</a><br>
+    {% endfor %}
+
+{% endblock %}

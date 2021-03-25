@@ -27,4 +27,21 @@ class CarteController extends AbstractController
 
         return $this->render('carte/vue.html.twig', array("etablissements"=>$etablissements));
     }
+
+    #[Route('/carte/communes/{page}', name: 'allCommunes')]
+    public function getAllCommunes(int $page): Response
+    {
+        $manager = $this->getDoctrine()->getManager();
+        $reposit = $manager->getRepository(Etablissement::class);
+
+        $communes = $reposit->findComunes($page);
+
+        return $this->render('carte/communes.html.twig', array("communes"=>$communes));
+    }
+
+    #[Route('/carte/communes', name: 'firstPageCommune')]
+    public function getFirstPageCommunes(): Response
+    {
+        return $this->redirect('/carte/communes/1');
+    }
 }

@@ -5,6 +5,7 @@ namespace App\Repository;
 use App\Entity\Etablissement;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Common\Collections\Collection;
+use Doctrine\Common\Collections\Criteria;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
@@ -54,5 +55,15 @@ class EtablissementRepository extends ServiceEntityRepository
             ->setParameter('val', $uai)
             ->getQuery()
             ->getOneOrNullResult();
+    }
+
+    public function findComunes(int $page): array
+    {
+        return $this->createQueryBuilder("e")
+            ->select("distinct e.code_commune, e.commune")
+            ->orderBy("e.commune")
+            ->addCriteria(new Criteria(firstResult: ($page-1)*50, maxResults: 50))
+            ->getQuery()
+            ->getArrayResult();
     }
 }
