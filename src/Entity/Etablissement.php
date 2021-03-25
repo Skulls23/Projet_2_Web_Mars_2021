@@ -59,7 +59,7 @@ class Etablissement
 
     /**
      * @Assert\Range(
-     *      min = 0,
+     *      min = -180,
      *      max = 180,
      *      notInRangeMessage = "A longitude value must be within  {{ min }} and {{ max }} degrees",
      * )
@@ -126,7 +126,7 @@ class Etablissement
     /**
      * @Assert\Range(
      *      min = 0,
-     *      max = 100000,
+     *      max = 500000,
      *      notInRangeMessage = "A value must be within  {{ min }} and {{ max }} !",
      * )
      *
