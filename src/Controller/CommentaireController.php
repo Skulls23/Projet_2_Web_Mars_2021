@@ -54,19 +54,26 @@ class CommentaireController extends AbstractController
     public function modifier(Request $req, int $id ): Response
     {
         $manager = $this->getDoctrine()->getManager();
-        $reposit = $manager->getRepository(Etablissement::class);
+        $reposit = $manager->getRepository(Commentaire::class);
 
-        $et = $id > -1 ? $reposit->find($id) : new Etablissement();
+        $com = $id > -1 ? $reposit->find($id) : new Commentaire();
 
-        $form = $this->createForm(CommentaireType::class, $et);
+        $form = $this->createForm(CommentaireType::class, $com);
         $form->handleRequest($req);
+        $com->setUai($manager->getRepository(Etablissement::class)->findByUAI($form->get("uai2")));
 
         if( $form->isSubmitted() && $form->isValid() )
         {
-            $manager->persist($et);
+            $manager->persist($com);
             $manager->flush();
         }
 
         return $this->render('commentaire/modifier_inserer/formulaire.html.twig', array("form" => $form->createView()));
+    }
+
+    #[Route('/commentaires/inserer', name: "insererCommentaire")]
+    public function inserer(Request $req): Response
+    {
+        return $this->modifier($req, -1);
     }
 }
