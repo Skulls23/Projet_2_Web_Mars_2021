@@ -4,13 +4,14 @@ namespace App\Controller;
 
 use App\Entity\Commentaire;
 use App\Entity\Etablissement;
+use App\Form\CommentaireType;
 use App\Repository\CommentaireRepository;
 use App\Repository\EtablissementRepository;
 use Doctrine\Bundle\DoctrineBundle\Registry;
-use http\Env\Request;
 use Symfony\Bridge\Doctrine\ManagerRegistry;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
+use \Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 
 class CommentaireController extends AbstractController
@@ -32,15 +33,40 @@ class CommentaireController extends AbstractController
     }
 
     #[Route('/commentaires/supprimer', name: "supprimerCommentaire")]
-    public function supprimer(Request $request): Response
+    public function supprimer(): Response
     {
-        return $this->render("commentaire/supprimer/supprimer.html.twig", array());
+        if( !isset($_POST['id']))
+            return $this->render('commentaire/supprimer/supprimer.html.twig', array("message" => "Suppression"));
+
+        $manager = $this->getDoctrine()->getManager();
+        $reposit = $manager->getRepository(Commentaire::class);
+
+        if($reposit->find(intval(htmlspecialchars($_POST['id']))) == null)
+            return $this->render("commentaire/supprimer/supprimer.html.twig", array("message" => "Commentaire introuvable"));
+
+        $manager->remove($reposit->find(intval(htmlspecialchars($_POST['id']))));
+        $manager->flush();
+
+        return $this->render("commentaire/supprimer/supprimer.html.twig", array("message" => "suppression effectué"));
     }
 
-    #[Route('/commentaires/modifier/{id}', name: "modifierCommentaire")]
-    public function modifier($id): Response
+    #[Route('/commentaires/{id}/modifier', name: "modifierCommentaire")]
+    public function modifier(Request $req, int $id ): Response
     {
-        //return $this->render("commentaire/supprimer/supprimer.html.twig", array("id"=>$id));
-        return new Response("");
+        $manager = $this->getDoctrine()->getManager();
+        $reposit = $manager->getRepository(Etablissement::class);
+
+        $et = $id > -1 ? $reposit->find($id) : new Etablissement();
+
+        $form = $this->createForm(CommentaireType::class, $et);
+        $form->handleRequest($req);
+
+        if( $form->isSubmitted() && $form->isValid() )
+        {
+            $manager->persist($et);
+            $manager->flush();
+        }
+
+        return $this->render('commentaire/modifier_inserer/formulaire.html.twig', array("form" => $form->createView()));
     }
 }
