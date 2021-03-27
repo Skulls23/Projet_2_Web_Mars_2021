@@ -89,7 +89,7 @@ class EtablissementController extends AbstractController
             $manager->flush();
         }
 
-        return $this->render('etablissement/modifier_inserer/formulaire.html.twig', array("form" => $form->createView()));
+        return $this->render('etablissement/modifier_inserer/formulaire.html.twig', array("title"=>$id ==-1 ? "Inserer":"Modifier", "form" => $form->createView()));
     }
 
     #[Route('/etablissements/modifier/{page}', name: "selectModifierEtablissement")]
