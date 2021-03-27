@@ -91,6 +91,30 @@ class EtablissementController extends AbstractController
         return $this->render('etablissement/modifier_inserer/formulaire.html.twig', array("form" => $form->createView()));
     }
 
+    #[Route('/etablissements/modifier/{page}', name: "selectModifierEtablissement")]
+    public function select_modifier(int $page): Response
+    {
+        if( $page == 0 ) $page = 1;
+
+        $page = abs($page);
+
+        $manager        = $this->getDoctrine()->getManager()->getRepository(Etablissement::class);
+        $etablissements = $manager->findBy(array(), orderBy: array("id" => "ASC"), limit: 50, offset: ($page-1)*50);
+
+        return $this->render('etablissement/modifier/modifier_viewAll.html.twig', array("page_10"=>$page > 10 ? $page-10 : -1,
+            "page_1" =>$page >  1 ? $page- 1 : -1,
+            "page1"  =>$page+1,
+            "page10"=>$page+10,
+            "page100"=>$page+100,
+            "etablissements"=>$etablissements));
+    }
+
+    #[Route('/etablissements/modifier', name: "selectFirstModifierEtablissement")]
+    public function select_modifierFirst(): Response
+    {
+        return $this->redirect('/etablissements/modifier/1');
+    }
+
     #[Route('/etablissements/inserer', name: "insererEtablissement")]
     public function inserer(Request $req): Response
     {
