@@ -6,6 +6,28 @@
 
     <h2>Modifier</h2>
 
-    {{ form(form) }}
+    {% set classLabels='labels' %}
+    {% set classValues='values' %}
+
+    {{ form_start(form, { 'attr': {'class': 'formulaire'}}) }}
+    <table>
+        <tr><td>{{ form_label(form.uai                  , "UAI"                  , {"label_attr": {"class": classLabels}}) }}</td><td>{{ form_widget(form.uai                  , {'attr': {'class': classValues}}) }}</td></tr>
+        <tr><td>{{ form_label(form.appellation_officelle, "Appellation Officelle", {"label_attr": {"class": classLabels}}) }}</td><td>{{ form_widget(form.appellation_officelle, {'attr': {'class': classValues}}) }}</td></tr>
+        <tr><td>{{ form_label(form.denomination         , "Dénomination"         , {"label_attr": {"class": classLabels}}) }}</td><td>{{ form_widget(form.denomination         , {'attr': {'class': classValues}}) }}</td></tr>
+        <tr><td>{{ form_label(form.secteur              , "Secteur"              , {"label_attr": {"class": classLabels}}) }}</td><td>{{ form_widget(form.secteur              , {'attr': {'class': classValues}}) }}</td></tr>
+        <tr><td>{{ form_label(form.latitude             , "Latitude"             , {"label_attr": {"class": classLabels}}) }}</td><td>{{ form_widget(form.latitude             , {'attr': {'class': classValues}}) }}</td></tr>
+        <tr><td>{{ form_label(form.longitude            , "Longitude"            , {"label_attr": {"class": classLabels}}) }}</td><td>{{ form_widget(form.longitude            , {'attr': {'class': classValues}}) }}</td></tr>
+        <tr><td>{{ form_label(form.adresse              , "Adresse"              , {"label_attr": {"class": classLabels}}) }}</td><td>{{ form_widget(form.adresse              , {'attr': {'class': classValues}}) }}</td></tr>
+        <tr><td>{{ form_label(form.departement          , "Departement"          , {"label_attr": {"class": classLabels}}) }}</td><td>{{ form_widget(form.departement          , {'attr': {'class': classValues}}) }}</td></tr>
+        <tr><td>{{ form_label(form.code_departement     , "Code Departement"     , {"label_attr": {"class": classLabels}}) }}</td><td>{{ form_widget(form.code_departement     , {'attr': {'class': classValues}}) }}</td></tr>
+        <tr><td>{{ form_label(form.commune              , "Commune"              , {"label_attr": {"class": classLabels}}) }}</td><td>{{ form_widget(form.commune              , {'attr': {'class': classValues}}) }}</td></tr>
+        <tr><td>{{ form_label(form.code_commune         , "Code Commune"         , {"label_attr": {"class": classLabels}}) }}</td><td>{{ form_widget(form.code_commune         , {'attr': {'class': classValues}}) }}</td></tr>
+        <tr><td>{{ form_label(form.region               , "Region"               , {"label_attr": {"class": classLabels}}) }}</td><td>{{ form_widget(form.region               , {'attr': {'class': classValues}}) }}</td></tr>
+        <tr><td>{{ form_label(form.academie             , "Academie"             , {"label_attr": {"class": classLabels}}) }}</td><td>{{ form_widget(form.academie             , {'attr': {'class': classValues}}) }}</td></tr>
+        <tr><td>{{ form_label(form.code_postal          , "Code Postal"          , {"label_attr": {"class": classLabels}}) }}</td><td>{{ form_widget(form.code_postal          , {'attr': {'class': classValues}}) }}</td></tr>
+        <tr><td>{{ form_label(form.date_ouverture       , "Date d'ouverture"     , {"label_attr": {"class": classLabels}}) }}</td><td>{{ form_widget(form.date_ouverture       , {'attr': {'class': classValues}}) }}</td></tr>
+        <tr><td><center>{{ form_widget(form.save) }}</center></td></tr>
+    </table>
+    {{ form_end(form) }}
 
 {% endblock %}

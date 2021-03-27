@@ -36,7 +36,8 @@ class CarteController extends AbstractController
 
         $communes = $reposit->findCommunes($page);
 
-        return $this->render('carte/communes.html.twig', array("communes"=>$communes));
+        return $this->render('carte/communes.html.twig', array("communes"=>$communes,
+            "page_10"=>$page-10, "page_1"=>$page-1, "page1"=>$page+1, "page10"=>$page+10, "page100"=>$page+100, "page"=>$page));
     }
 
     #[Route('/carte/communes', name: 'firstPageCommune')]
