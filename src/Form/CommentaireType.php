@@ -5,6 +5,7 @@ namespace App\Form;
 use App\Entity\Commentaire;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
+use Symfony\Component\Form\Extension\Core\Type\HiddenType;
 use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
@@ -20,7 +21,7 @@ class CommentaireType extends AbstractType
             ->add('date_creation', DateType::class, array("years" => range(1900, 2100)))
             ->add('note', IntegerType::class)
             ->add('texte', TextType::class)
-            ->add('uai2', TextType::class)
+            ->add('uai2', TextType::class, array("mapped"=>false))
             ->add("save", SubmitType::class)
         ;
     }

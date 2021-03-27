@@ -60,7 +60,10 @@ class CommentaireController extends AbstractController
 
         $form = $this->createForm(CommentaireType::class, $com);
         $form->handleRequest($req);
-        $com->setUai($manager->getRepository(Etablissement::class)->findByUAI($form->get("uai2")));
+        if(! $form->isSubmitted())
+        $form["uai2"]->setData($com->getUai()->getUai());
+
+        $com->setUai($manager->getRepository(Etablissement::class)->findByUAI($form->get("uai2")->getData()));
 
         if( $form->isSubmitted() && $form->isValid() )
         {

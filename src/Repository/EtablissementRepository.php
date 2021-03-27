@@ -57,7 +57,7 @@ class EtablissementRepository extends ServiceEntityRepository
             ->getOneOrNullResult();
     }
 
-    public function findComunes(int $page): array
+    public function findCommunes(int $page): array
     {
         return $this->createQueryBuilder("e")
             ->select("distinct e.code_commune, e.commune")

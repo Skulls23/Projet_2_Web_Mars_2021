@@ -34,7 +34,7 @@ class CarteController extends AbstractController
         $manager = $this->getDoctrine()->getManager();
         $reposit = $manager->getRepository(Etablissement::class);
 
-        $communes = $reposit->findComunes($page);
+        $communes = $reposit->findCommunes($page);
 
         return $this->render('carte/communes.html.twig', array("communes"=>$communes));
     }
