@@ -1,0 +1,17 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Suppression d'un commentaire{% endblock %}
+
+{% block body %}
+
+    <h2>{{ message }}</h2>
+
+    <form method="post">
+        <label for="id">
+            ID:
+            <input type="text" name="id" />
+        </label>
+        <input type="submit">
+    </form>
+
+{% endblock %}

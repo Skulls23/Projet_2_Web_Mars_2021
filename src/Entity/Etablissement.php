@@ -42,7 +42,7 @@ class Etablissement
     /**
      * @Assert\NotBlank()
      *
-     * @ORM\Column(type="string", columnDefinition="enum('Public', 'Privée')")
+     * @ORM\Column(type="string")
      */
     private $secteur;
 
@@ -352,5 +352,10 @@ class Etablissement
         $this->code_commune = $code_commune;
 
         return $this;
+    }
+
+    public function __toString(): string
+    {
+        return $this->getAppellationOfficelle();
     }
 }

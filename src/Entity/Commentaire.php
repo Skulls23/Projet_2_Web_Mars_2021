@@ -66,6 +66,13 @@ class Commentaire
         return $this->date_creation;
     }
 
+    public function getDateString(): ?string
+    {
+        if($this->getDateCreation() != null)
+            return $this->getDateCreation()->format("d-m-Y");
+        return null;
+    }
+
     public function setDateCreation(DateTimeInterface $date_creation): self
     {
         $this->date_creation = $date_creation;

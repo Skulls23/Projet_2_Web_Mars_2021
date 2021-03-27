@@ -5,6 +5,7 @@ namespace App\Repository;
 use App\Entity\Commentaire;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Common\Collections\Collection;
+use Doctrine\Common\Collections\Criteria;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
@@ -47,11 +48,12 @@ class CommentaireRepository extends ServiceEntityRepository
     }
     */
 
-    public function findByUAI($uai):?Collection
+    public function findByUAI($uai, int $page):array
     {
         return $this->createQueryBuilder('e')
             ->andWhere('e.uai = :val')
             ->setParameter('val', $uai)
+            ->addCriteria(new Criteria(firstResult: ($page-1)*50, maxResults: 50))
             ->getQuery()
             ->getResult();
     }
