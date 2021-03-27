@@ -49,12 +49,6 @@ class CommentaireController extends AbstractController
             "etablissements"=>$etablissements));
     }
 
-    #[Route('/commentaires/vue/{uai}', name: 'getVueSansPageCommentaires')]
-    public function getVueSansPage($uai): Response
-    {
-        return $this->redirect('/commentaires/vue/'.$uai.'/1');
-    }
-
     #[Route('/commentaires/vue/{uai}/{pages}', name: 'getVueCommentaire')]
     public function getVue($uai, int $pages):Response
     {

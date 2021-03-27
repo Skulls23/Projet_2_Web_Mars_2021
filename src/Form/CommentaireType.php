@@ -17,11 +17,11 @@ class CommentaireType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('auteur', TextType::class)
+            ->add('auteur', TextType::class, array("attr"=>array("required")))
             ->add('date_creation', DateType::class, array("years" => range(1900, 2100)))
-            ->add('note', IntegerType::class)
-            ->add('texte', TextType::class)
-            ->add('uai2', TextType::class, array("mapped"=>false))
+            ->add('note', IntegerType::class, array("attr"=>array("min"=>0 , "max"=>20) ))
+            ->add('texte', TextType::class, array("attr"=>array("required")))
+            ->add('uai2', TextType::class, array("mapped"=>false, "attr"=>array("required")))
             ->add("save", SubmitType::class)
         ;
     }

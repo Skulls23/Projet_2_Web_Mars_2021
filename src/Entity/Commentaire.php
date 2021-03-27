@@ -5,6 +5,7 @@ namespace App\Entity;
 use DateTimeInterface;
 use App\Repository\CommentaireRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass=CommentaireRepository::class)
@@ -19,6 +20,8 @@ class Commentaire
     private $id;
 
     /**
+     * @Assert\NotBlank()
+     *
      * @ORM\Column(type="string", length=50)
      */
     private $auteur;
@@ -29,11 +32,19 @@ class Commentaire
     private $date_creation;
 
     /**
+     *  @Assert\Range(
+     *      min = 0,
+     *      max = 20,
+     *      notInRangeMessage = "A note value must be within  {{ min }} and {{ max }} degrees",
+     * )
+     *
      * @ORM\Column(type="integer")
      */
     private $note;
 
     /**
+     * @Assert\NotBlank()
+     *
      * @ORM\Column(type="string", length=500)
      */
     private $texte;

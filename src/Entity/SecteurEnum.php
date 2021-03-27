@@ -5,6 +5,7 @@ namespace App\Entity;
 
 
 use Doctrine\Common\Annotations\Annotation\Enum;
+use JetBrains\PhpStorm\ArrayShape;
 use JetBrains\PhpStorm\Pure;
 
 class SecteurEnum
@@ -18,6 +19,7 @@ class SecteurEnum
             self::PUBLIC );
     }
 
+    #[ArrayShape([self::PRIVEE => "string", self::PUBLIC => "string"])]
     public static function assocValues(): array
     {
         return array( self::PRIVEE => self::PRIVEE,
