@@ -104,12 +104,12 @@ class Commentaire
         return $this;
     }
 
-    public function getUai(): ?Etablissement
+    public function getEtablissement(): ?Etablissement
     {
         return $this->uai;
     }
 
-    public function setUai(?Etablissement $uai): self
+    public function setEtablissement(?Etablissement $uai): self
     {
         $this->uai = $uai;
 

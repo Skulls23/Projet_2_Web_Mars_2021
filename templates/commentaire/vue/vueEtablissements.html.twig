@@ -1,0 +1,43 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Selection Etablissement{% endblock %}
+
+{% block body %}
+
+    {% set pages %}
+        <center>
+            page
+            {% if page_10 > -1 %}
+                <a href="/commentaires/vue/{{ page_10 }}" >{{ page_10 }} </a>&nbsp;
+            {% endif %}
+
+            {% if page_1 > -1 %}
+                <a href="/commentaires/vue/{{ page_1 }}" >{{ page_1 }} </a>&nbsp;
+            {% endif %}
+
+            <b>{{ page }}</b>
+
+            <a href="/commentaires/vue/{{ page1 }}" >{{ page1 }} </a>&nbsp;
+            <a href="/commentaires/vue/{{ page10 }}">{{ page10 }}</a>
+            <a href="/commentaires/vue/{{ page100 }}">{{ page100 }}</a><br/>
+        </center>
+    {% endset %}
+
+    {{ pages }}
+
+    <table>
+        <thead>
+        <tr>
+            <td>Appelation Officielle - Code Postal</td>
+        </tr>
+        </thead>
+        {% for et in etablissements %}
+            <tr>
+                <td><a href="/commentaires/vue/{{ et.getUAI() }}/1  " >{{ et.getAppellationOfficelle() }} - {{ et.getCodePostal() }}</a></td>
+            </tr>
+        {% endfor %}
+    </table>
+
+    {{ pages }}
+
+{% endblock %}

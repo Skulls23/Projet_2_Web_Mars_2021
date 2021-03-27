@@ -324,7 +324,7 @@ class Etablissement
     {
         if (!$this->commentaire->contains($commentaire)) {
             $this->commentaire[] = $commentaire;
-            $commentaire->setUai($this);
+            $commentaire->setEtablissement($this);
         }
 
         return $this;
@@ -334,8 +334,8 @@ class Etablissement
     {
         if ($this->commentaire->removeElement($commentaire)) {
             // set the owning side to null (unless already changed)
-            if ($commentaire->getUai() === $this) {
-                $commentaire->setUai(null);
+            if ($commentaire->getEtablissement() === $this) {
+                $commentaire->setEtablissement(null);
             }
         }
 

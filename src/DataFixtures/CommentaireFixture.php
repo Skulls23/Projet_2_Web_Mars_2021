@@ -31,7 +31,7 @@ Caminar Sopra 'l giaccio, e à passo lento
 Per timor di cader gersene intenti;");
         $commentaire->setNote(4);
         $etablissement = $manager->getRepository(Etablissement::class)->findByUAI("0260665G");
-        $commentaire->setUai($etablissement);
+        $commentaire->setEtablissement($etablissement);
 
         echo "Etablissement: " . ($etablissement == null ? "null" : $etablissement->getId());
 

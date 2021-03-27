@@ -24,6 +24,37 @@ class CommentaireController extends AbstractController
         ]);
     }
 
+    #[Route('/commentaires/vue', name: 'getVueSansPageSelectEtablissement')]
+    public function getVueSansPageSelectEtablissement(): Response
+    {
+        return $this->redirect('/commentaires/vue/1');
+    }
+
+    #[Route('/commentaires/vue/{page}', name: "selectVueCommentaire")]
+    public function select_vue(int $page): Response
+    {
+        if( $page == 0 ) $page = 1;
+
+        $page = abs($page);
+
+        $manager        = $this->getDoctrine()->getManager()->getRepository(Etablissement::class);
+        $etablissements = $manager->findBy(array(), orderBy: array("id" => "ASC"), limit: 50, offset: ($page-1)*50);
+
+        return $this->render('commentaire/vue/vueEtablissements.html.twig', array("page_10"=>$page > 10 ? $page-10 : -1,
+            "page_1" =>$page >  1 ? $page- 1 : -1,
+            "page1"  =>$page+1,
+            "page10"=>$page+10,
+            "page100"=>$page+100,
+            "page"=>$page,
+            "etablissements"=>$etablissements));
+    }
+
+    #[Route('/commentaires/vue/{uai}', name: 'getVueSansPageCommentaires')]
+    public function getVueSansPage($uai): Response
+    {
+        return $this->redirect('/commentaires/vue/'.$uai.'/1');
+    }
+
     #[Route('/commentaires/vue/{uai}/{pages}', name: 'getVueCommentaire')]
     public function getVue($uai, int $pages):Response
     {
@@ -60,10 +91,10 @@ class CommentaireController extends AbstractController
 
         $form = $this->createForm(CommentaireType::class, $com);
         $form->handleRequest($req);
-        if(! $form->isSubmitted())
-        $form["uai2"]->setData($com->getUai()->getUai());
+        if(! $form->isSubmitted() && $com->getEtablissement() != null)
+            $form["uai2"]->setData($com->getEtablissement()->getUai());
 
-        $com->setUai($manager->getRepository(Etablissement::class)->findByUAI($form->get("uai2")->getData()));
+        $com->setEtablissement($manager->getRepository(Etablissement::class)->findByUAI($form->get("uai2")->getData()));
 
         if( $form->isSubmitted() && $form->isValid() )
         {
@@ -73,6 +104,32 @@ class CommentaireController extends AbstractController
 
         return $this->render('commentaire/modifier_inserer/formulaire.html.twig', array("form" => $form->createView()));
     }
+
+    #[Route('/commentaires/modifier/{page}', name: "selectModifierCommentaire")]
+    public function select_modifier(int $page): Response
+    {
+        if( $page == 0 ) $page = 1;
+
+        $page = abs($page);
+
+        $manager        = $this->getDoctrine()->getManager()->getRepository(Commentaire::class);
+        $commentaire = $manager->findBy(array(), orderBy: array("id" => "ASC"), limit: 50, offset: ($page-1)*50);
+
+        return $this->render('commentaire/modifier/modifier_viewAll.html.twig', array("page_1"=>$page > 1 ? $page-1 : -1,
+            "page_2"=>$page >  2 ? $page-2 : -2,
+            "page1" =>$page+1,
+            "page2" =>$page+2,
+            "page3" =>$page+3,
+            "page"  =>$page,
+            "commentaires"=>$commentaire));
+    }
+
+    #[Route('/commentaires/modifier', name: "selectFirstModifierCommentaire")]
+    public function select_modifierFirst(): Response
+    {
+        return $this->redirect('/commentaires/modifier/1');
+    }
+
 
     #[Route('/commentaires/inserer', name: "insererCommentaire")]
     public function inserer(Request $req): Response

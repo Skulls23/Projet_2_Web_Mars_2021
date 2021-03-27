@@ -3,6 +3,7 @@
 namespace App\Repository;
 
 use App\Entity\Commentaire;
+use App\Entity\Etablissement;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\Common\Collections\Criteria;
@@ -50,9 +51,10 @@ class CommentaireRepository extends ServiceEntityRepository
 
     public function findByUAI($uai, int $page):array
     {
+        $etablissement = $this->getEntityManager()->getRepository(Etablissement::class)->findByUAI($uai);
         return $this->createQueryBuilder('e')
             ->andWhere('e.uai = :val')
-            ->setParameter('val', $uai)
+            ->setParameter('val', $etablissement->getId())
             ->addCriteria(new Criteria(firstResult: ($page-1)*50, maxResults: 50))
             ->getQuery()
             ->getResult();

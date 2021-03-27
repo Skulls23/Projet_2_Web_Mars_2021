@@ -1,0 +1,43 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Selection Commentaire{% endblock %}
+
+{% block body %}
+
+    {% set pages %}
+        <center>
+            page
+            {% if page_2 > -1 %}
+                <a href="/commentaires/modifier/{{ page_2 }}" >{{ page_2 }} </a>&nbsp;
+            {% endif %}
+
+            {% if page_1 > -1 %}
+                <a href="/commentaires/modifier/{{ page_1 }}" >{{ page_1 }} </a>&nbsp;
+            {% endif %}
+
+            <b>{{ page }}</b>
+
+            <a href="/commentaires/modifier/{{ page1 }}" >{{ page1 }} </a>&nbsp;
+            <a href="/commentaires/modifier/{{ page2 }}">{{ page2 }}</a>
+            <a href="/commentaires/modifier/{{ page3 }}">{{ page3 }}</a><br/>
+        </center>
+    {% endset %}
+
+    {{ pages }}
+
+    <table>
+        <thead>
+        <tr>
+            <td>Auteur - Texte</td>
+        </tr>
+        </thead>
+        {% for com in commentaires %}
+            <tr>
+                <td><a href="/commentaires/{{ com.getId() }}/modifier" >{{ com.getAuteur() }} - {{ com.getTexte() }}</a></td>
+            </tr>
+        {% endfor %}
+    </table>
+
+    {{ pages }}
+
+{% endblock %}
