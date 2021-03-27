@@ -84,10 +84,7 @@ button
 .bouton
 {
     margin-top: 2em;
-    border-top-width: 10px;
-    border-bottom-width: 10px;
-    border-left-width: 10px;
-    border-right-width: 10px;
+    border-width: 10px;
     border-color: hsl(565, 60%, 50%);
 }
 
