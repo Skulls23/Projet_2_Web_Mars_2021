@@ -48,7 +48,7 @@ class EtablissementController extends AbstractController
     public function supprimer(): Response
     {
         if( !isset($_POST['uai']) && !isset($_POST['id']))
-            return $this->render('etablissement/supprimer/supprimer.html.twig', array("message" => ""));
+            return $this->render('etablissement/supprimer/supprimer.html.twig', array("message" => "Suppression d'Établissement"));
 
         $manager = $this->getDoctrine()->getManager();
         $reposit = $manager->getRepository(Etablissement::class);
@@ -58,7 +58,7 @@ class EtablissementController extends AbstractController
             $etablissement = $reposit->findBy(array("uai" => htmlspecialchars($_POST['uai'])));
 
             if( $etablissement == null ||count($etablissement) == 0 )
-                return $this->render('etablissement/supprimer/supprimer.html.twig', array("message" => "not found"));
+                return $this->render('etablissement/supprimer/supprimer.html.twig', array("message" => "Établissement non trouvé"));
 
             return $this->render('etablissement/supprimer/supprimer_confirmation.html.twig', array("nom" => $etablissement[0]->getAppellationOfficelle(),
                 "id" => $etablissement[0]->getId(), "code_postal" => $etablissement[0]->getCodePostal()));
@@ -68,7 +68,7 @@ class EtablissementController extends AbstractController
             $manager->remove($reposit->find(intval(htmlspecialchars($_POST['id']))));
             $manager->flush();
 
-            return $this->render('etablissement/supprimer/supprimer.html.twig', array("message" => "suppression effectué"));
+            return $this->render('etablissement/supprimer/supprimer.html.twig', array("message" => "Suppression effectué"));
         }
     }
 

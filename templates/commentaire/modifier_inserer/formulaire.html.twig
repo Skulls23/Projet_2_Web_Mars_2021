@@ -17,8 +17,8 @@
         <tr><td>{{ form_label(form.note         , "Note"            , {"label_attr": {"class": classLabels}}) }}</td><td>{{ form_widget(form.note         , {'attr': {'class': classValues}}) }}</td></tr>
         <tr><td>{{ form_label(form.texte        , "Texte"           , {"label_attr": {"class": classLabels}}) }}</td><td>{{ form_widget(form.texte        , {'attr': {'class': classValues}}) }}</td></tr>
         <tr><td>{{ form_label(form.uai2         , "UAI"             , {"label_attr": {"class": classLabels}}) }}</td><td>{{ form_widget(form.uai2         , {'attr': {'class': classValues}}) }}</td></tr>
-        <tr><td class="centrer">{{ form_widget(form.save, {"label_attr": {"class": classBoutons}}) }}</td></tr>
     </table>
+    <div class="centrer centrerBouton">{{ form_widget(form.save, {"attr": {"class": classBoutons}}) }}</div>
     {{ form_end(form) }}
 
 {% endblock %}

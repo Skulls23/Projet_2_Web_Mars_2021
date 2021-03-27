@@ -8,6 +8,7 @@
 
     {% set classLabels='labels' %}
     {% set classValues='values' %}
+    {% set classBoutons='bouton'%}
 
     {{ form_start(form, { 'attr': {'class': 'formulaire'}}) }}
     <table>
@@ -26,8 +27,9 @@
         <tr><td>{{ form_label(form.academie             , "Academie"              , {"label_attr": {"class": classLabels}}) }}</td><td>{{ form_widget(form.academie             , {'attr': {'class': classValues}}) }}</td></tr>
         <tr><td>{{ form_label(form.code_postal          , "Code Postal"           , {"label_attr": {"class": classLabels}}) }}</td><td>{{ form_widget(form.code_postal          , {'attr': {'class': classValues}}) }}</td></tr>
         <tr><td>{{ form_label(form.date_ouverture       , "Date d'ouverture"      , {"label_attr": {"class": classLabels}}) }}</td><td>{{ form_widget(form.date_ouverture       , {'attr': {'class': classValues}}) }}</td></tr>
-        <tr><td class="centrer">{{ form_widget(form.save) }}</td></tr>
     </table>
+
+    <div class="centrer centrerBouton">{{ form_widget(form.save, {"attr": {"class": classBoutons}}) }}</div>
     {{ form_end(form) }}
 
 {% endblock %}

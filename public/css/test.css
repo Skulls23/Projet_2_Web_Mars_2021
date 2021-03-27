@@ -57,7 +57,6 @@ a:visited
 
 h1, h2
 {
-
     text-align: center;
     color: white;
 }
@@ -77,10 +76,24 @@ h2
     text-align: center;
 }
 
+button
+{
+    font-weight: bold;
+}
+
+.bouton
+{
+    margin-top: 2em;
+    border-top-width: 10px;
+    border-bottom-width: 10px;
+    border-left-width: 10px;
+    border-right-width: 10px;
+    border-color: hsl(565, 60%, 50%);
+}
+
 button, input, select
 {
     border-radius: 150px 25px / 150px;
-    color: black;
     font-family: Consolas, serif;
     margin:4px;
     background-color: white;

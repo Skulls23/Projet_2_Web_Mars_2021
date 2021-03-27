@@ -4,15 +4,17 @@
 
 {% block body %}
 
-    <p>Confirmer suppression de {{ nom }} avec le code postal "{{ code_postal }}" ?</p>
+    <div class="centrer">
+        <p>Confirmer suppression de {{ nom }} avec le code postal "{{ code_postal }}" ?</p>
 
-    <form method="post">
-        <input type="hidden" name="id" value="{{ id }}" />
-        <input type="submit" value="valider">
-    </form>
+        <form method="post">
+            <input type="hidden" name="id" value="{{ id }}" />
+            <input type="submit" value="valider">
+        </form>
 
-    <form method="post" action="supprimer">
-        <input type="submit" value="annuler">
-    </form>
+        <form method="post" action="supprimer">
+            <button type="submit">Valider</button>
+        </form>
+    </div>
 
 {% endblock %}
