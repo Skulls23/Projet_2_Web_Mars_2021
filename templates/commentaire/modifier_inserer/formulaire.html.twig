@@ -6,6 +6,19 @@
 
     <h2>Modifier</h2>
 
-    {{ form(form) }}
+    {% set classLabels ='labels' %}
+    {% set classValues ='values' %}
+    {% set classBoutons='bouton' %}
+
+    {{ form_start(form, { 'attr': {'class': 'formulaire'}}) }}
+    <table>
+        <tr><td>{{ form_label(form.auteur       , "Auteur"          , {"label_attr": {"class": classLabels}}) }}</td><td>{{ form_widget(form.auteur       , {'attr': {'class': classValues}}) }}</td></tr>
+        <tr><td>{{ form_label(form.date_creation, "Date de création", {"label_attr": {"class": classLabels}}) }}</td><td>{{ form_widget(form.date_creation, {'attr': {'class': classValues}}) }}</td></tr>
+        <tr><td>{{ form_label(form.note         , "Note"            , {"label_attr": {"class": classLabels}}) }}</td><td>{{ form_widget(form.note         , {'attr': {'class': classValues}}) }}</td></tr>
+        <tr><td>{{ form_label(form.texte        , "Texte"           , {"label_attr": {"class": classLabels}}) }}</td><td>{{ form_widget(form.texte        , {'attr': {'class': classValues}}) }}</td></tr>
+        <tr><td>{{ form_label(form.uai2         , "UAI"             , {"label_attr": {"class": classLabels}}) }}</td><td>{{ form_widget(form.uai2         , {'attr': {'class': classValues}}) }}</td></tr>
+        <tr><td class="centrer">{{ form_widget(form.save, {"label_attr": {"class": classBoutons}}) }}</td></tr>
+    </table>
+    {{ form_end(form) }}
 
 {% endblock %}

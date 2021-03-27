@@ -5,25 +5,26 @@
 {% block body %}
 
     {% set pages %}
-        <center>
+        <div class="centrer">
+            </b>
             page
             {% if page_2 > -1 %}
-                <a href="/commentaires/modifier/{{ page_2 }}" >{{ page_2 }} </a>&nbsp;
+                <a href="/commentaires/modifier/{{ page_2 }}" >{{ page_2 }}</a>&nbsp;
             {% endif %}
 
             {% if page_1 > -1 %}
-                <a href="/commentaires/modifier/{{ page_1 }}" >{{ page_1 }} </a>&nbsp;
+                <a href="/commentaires/modifier/{{ page_1 }}" >{{ page_1 }}</a>&nbsp;
             {% endif %}
 
-            <b>{{ page }}</b>
+            <b class="pageActuelle">{{ page }}</b>
 
-            <a href="/commentaires/modifier/{{ page1 }}" >{{ page1 }} </a>&nbsp;
+            <a href="/commentaires/modifier/{{ page1 }}" >{{ page1 }}</a>&nbsp;
             <a href="/commentaires/modifier/{{ page2 }}">{{ page2 }}</a>
             <a href="/commentaires/modifier/{{ page3 }}">{{ page3 }}</a><br/>
-        </center>
+        </div>
     {% endset %}
 
-    {{ pages }}
+    <b class="pageActuelle">{{ pages }}</b>
 
     <table>
         <thead>

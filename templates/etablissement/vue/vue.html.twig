@@ -5,22 +5,22 @@
 {% block body %}
 
     {% set pages %}
-        <center>
+        <div class="centrer">
             page
             {% if page_10 > -1 %}
-                <a href="/etablissements/vue/{{ page_10 }}" >{{ page_10 }} </a>&nbsp;
+                <a href="/etablissements/vue/{{ page_10 }}" >{{ page_10 }}</a>&nbsp;
             {% endif %}
 
             {% if page_1 > -1 %}
-                <a href="/etablissements/vue/{{ page_1 }}" >{{ page_1 }} </a>&nbsp;
+                <a href="/etablissements/vue/{{ page_1 }}" >{{ page_1 }}</a>&nbsp;
             {% endif %}
 
-            <b>{{ page }}</b>
+            <b class="pageActuelle">{{ page }}</b>
 
-            <a href="/etablissements/vue/{{ page1 }}" >{{ page1 }} </a>&nbsp;
+            <a href="/etablissements/vue/{{ page1 }}" >{{ page1 }}</a>&nbsp;
             <a href="/etablissements/vue/{{ page10 }}">{{ page10 }}</a>
             <a href="/etablissements/vue/{{ page100 }}">{{ page100 }}</a><br/>
-        </center>
+        </div>>
     {% endset %}
 
     {{ pages }}
@@ -30,7 +30,7 @@
             <tr>
                 <td>ID</td>
                 <td>UAI</td>
-                <td>Appelation Officielle</td>
+                <td>Appellation Officielle</td>
                 <td>Code Postal</td>
             </tr>
         </thead>

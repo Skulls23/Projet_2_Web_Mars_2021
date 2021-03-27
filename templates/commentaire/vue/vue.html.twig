@@ -5,23 +5,23 @@
     {% block body %}
 
         {% set pages %}
-            <center>
+            <div class="centrer">
                 page
                 {% if page_2 > -1 %}
-                    <a href="/commentaires/vue/{{ uai }}/{{ page_2 }}" >{{ page_2 }} </a>&nbsp;
+                    <a href="/commentaires/vue/{{ uai }}/{{ page_2 }}" >{{ page_2 }}</a>&nbsp;
                 {% endif %}
 
                 {% if page_1 > -1 %}
-                    <a href="/commentaires/vue/{{ uai }}/{{ page_1 }}" >{{ page_1 }} </a>&nbsp;
+                    <a href="/commentaires/vue/{{ uai }}/{{ page_1 }}" >{{ page_1 }}</a>&nbsp;
                 {% endif %}
 
                 <a href="/commentaires/vue/{{ uai }}/{{ page1 }}" >{{ page1 }}</a>&nbsp;
                 <a href="/commentaires/vue/{{ uai }}/{{ page2 }}"> {{ page2 }}</a>
                 <a href="/commentaires/vue/{{ uai }}/{{ page3 }}"> {{ page3 }}</a><br/>
-            </center>
+            </div>
         {% endset %}
 
-        {{ pages }}
+        <b class="pageActuelle">{{ pages }}</b>
 
         <table>
             {% for com in commentaires %}

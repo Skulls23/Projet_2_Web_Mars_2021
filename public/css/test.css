@@ -1,3 +1,87 @@
-body {
-    color: red;
+body
+{
+    font-family: Consolas, serif;
+    background-color: darkslategrey;
+    color: white;
+}
+
+.clickableMenu
+{
+    background-color: darkslategrey;
+}
+
+table
+{
+    color: white;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* Lignes autour des cases de tableau */
+td, th {
+    border: 0.1rem solid black;
+    padding: 0.2rem;
+}
+
+/* Coloriation des titres de tableau */
+th
+{
+    background-color: seagreen;
+}
+
+/*Coloration du tableau, on s'arrete a 8 couleurs, etant le nombre max d'element*/
+td:nth-child(1)  { background: hsl(565, 60%, 50%); }
+td:nth-child(2)  { background: hsl(560, 50%, 50%); }
+td:nth-child(3)  { background: hsl(555, 40%, 50%); }
+td:nth-child(4)  { background: hsl(550, 30%, 50%); }
+
+a
+{
+    color: hsl(435, 95%, 50%);
+}
+
+a:hover, a:visited:hover
+{
+    color : hsl(400, 95%, 50%);
+}
+
+a:visited
+{
+    color : hsl(356, 71%, 45%);
+}
+
+.pageActuelle
+{
+    color: brown;
+}
+
+h1, h2
+{
+
+    text-align: center;
+    color: white;
+}
+
+h2
+{
+    font-size: 30px;
+}
+
+h2
+{
+    font-size: 50px;
+}
+
+.centrer
+{
+    text-align: center;
+}
+
+button, input, select
+{
+    border-radius: 150px 25px / 150px;
+    color: black;
+    font-family: Consolas, serif;
+    margin:4px;
+    background-color: white;
 }
