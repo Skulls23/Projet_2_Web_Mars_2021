@@ -15,6 +15,8 @@
                 <a href="/etablissements/modifier/{{ page_1 }}" >{{ page_1 }} </a>&nbsp;
             {% endif %}
 
+            <b>{{ page }}</b>
+
             <a href="/etablissements/modifier/{{ page1 }}" >{{ page1 }} </a>&nbsp;
             <a href="/etablissements/modifier/{{ page10 }}">{{ page10 }}</a>
             <a href="/etablissements/modifier/{{ page100 }}">{{ page100 }}</a><br/>
@@ -24,6 +26,11 @@
     {{ pages }}
 
     <table>
+        <thead>
+        <tr>
+            <td>Appelation Officielle - Code Postal</td>
+        </tr>
+        </thead>
         {% for et in etablissements %}
             <tr>
                 <td><a href="/etablissements/{{ et.getId() }}/modifier" >{{ et.getAppellationOfficelle() }} - {{ et.getCodePostal() }}</a></td>

@@ -4,8 +4,31 @@
 
 {% block body %}
 
+    {% set pages %}
+        <center>
+            page
+            {% if page_10 > 0 %}
+                <a href="/carte/communes/{{ page_10 }}" >{{ page_10 }} </a>&nbsp;
+            {% endif %}
+
+            {% if page_1 > 0 %}
+                <a href="/carte/communes/{{ page_1 }}" >{{ page_1 }} </a>&nbsp;
+            {% endif %}
+
+            <b>{{ page }}</b>
+
+            <a href="/carte/communes/{{ page1 }}" >{{ page1 }} </a>&nbsp;
+            <a href="/carte/communes/{{ page10 }}">{{ page10 }}</a>
+            <a href="/carte/communes/{{ page100 }}">{{ page100 }}</a><br/>
+        </center>
+    {% endset %}
+
+    {{ pages }}
+
     {% for val in communes %}
         <a href="/carte/commune/{{ val['code_commune'] }}">{{ val['code_commune'] }} - {{ val['commune'] }}</a><br>
     {% endfor %}
+
+    {{ pages }}
 
 {% endblock %}
