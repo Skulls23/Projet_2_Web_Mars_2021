@@ -4,11 +4,24 @@
 
 {% block body %}
 
-    <center>
-        <a href="/etablissements/vue/{{ page1 }}" >{{ page1 }} </a>&nbsp;
-        <a href="/etablissements/vue/{{ page5 }}" >{{ page5 }} </a>&nbsp;
-        <a href="/etablissements/vue/{{ page10 }}">{{ page10 }}</a> <br/>
-    </center>
+    {% set pages %}
+        <center>
+            page
+            {% if page_10 > -1 %}
+                <a href="/etablissements/vue/{{ page_10 }}" >{{ page_10 }} </a>&nbsp;
+            {% endif %}
+
+            {% if page_1 > -1 %}
+                <a href="/etablissements/vue/{{ page_1 }}" >{{ page_1 }} </a>&nbsp;
+            {% endif %}
+
+            <a href="/etablissements/vue/{{ page1 }}" >{{ page1 }} </a>&nbsp;
+            <a href="/etablissements/vue/{{ page10 }}">{{ page10 }}</a>
+            <a href="/etablissements/vue/{{ page100 }}">{{ page100 }}</a><br/>
+        </center>
+    {% endset %}
+
+    {{ pages }}
 
     <table>
         {% for et in etablissements %}
@@ -20,5 +33,7 @@
             </tr>
         {% endfor %}
     </table>
+
+    {{ pages }}
 
 {% endblock %}

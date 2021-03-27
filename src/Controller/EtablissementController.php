@@ -35,7 +35,12 @@ class EtablissementController extends AbstractController
         $manager        = $this->getDoctrine()->getManager()->getRepository(Etablissement::class);
         $etablissements = $manager->findBy(array(), orderBy: array("id" => "ASC"), limit: 50, offset: ($page-1)*50);
 
-        return $this->render('etablissement/vue/vue.html.twig', array("page1"=>$page+1, "page5"=>$page+5, "page10"=>$page+10, "etablissements"=>$etablissements));
+        return $this->render('etablissement/vue/vue.html.twig', array("page_10"=>$page > 10 ? $page-10 : -1,
+                                                                           "page_1" =>$page >  1 ? $page- 1 : -1,
+                                                                           "page1"  =>$page+1,
+                                                                           "page10"=>$page+10,
+                                                                           "page100"=>$page+100,
+                                                                           "etablissements"=>$etablissements));
     }
 
     #[Route('/etablissements/supprimer', name: "supprimerEtablissement")]

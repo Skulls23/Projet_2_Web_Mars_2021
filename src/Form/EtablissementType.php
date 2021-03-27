@@ -34,7 +34,7 @@ class EtablissementType extends AbstractType
             ->add('region', TextType::class)
             ->add('academie', TextType::class)
             ->add('code_postal', IntegerType::class, array("attr"=>array("max"=>100000, "min"=>0)))
-            ->add('date_ouverture', DateType::class, array("years" => range(1950, 2100)))
+            ->add('date_ouverture', DateType::class, array("years" => range(1900, 2100)))
             ->add('save', SubmitType::class)
         ;
     }
